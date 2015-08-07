@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Raleway' />     
+    <link href="@Url.Content("~/Content/keen-static.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/keen-dashboards.css")" rel="stylesheet" type="text/css" />
+   
+
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>    
+    @*<script src="@Url.Content("~/Scripts/jquery.csv-0.71.js")"></script>*@
+
+    <script>
+        google.load("visualization", "1", { packages: ["corechart", "bar"] });
+        google.setOnLoadCallback(drawCharts);
+        function drawCharts() {
+            // grab the CSV
+            //$.get("./csv/priorityStats.csv", function (csvString) {
+            //    var arrayData1 = $.csv.toArrays(csvString, { onParseValue: $.csv.hooks.castToScalar });
+                var data1 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data1));
+                var options1 = {
+                    title: '#Bugs and Priority',
+                    pieHole: 0.4,
+                    pieSliceText: 'value'
+                };
+
+                var chart1 = new google.visualization.PieChart(document.getElementById('chartPriority'));
+                chart1.draw(data1, options1);
+            //}
+            // );
+
+            //$.get("./csv/statusStats.csv", function (csvString) {
+            //    var arrayData2 = $.csv.toArrays(csvString, { onParseValue: $.csv.hooks.castToScalar });
+                var data2 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data2));
+                var options2 = {
+                    title: '#Bugs and Status',
+                    pieHole: 0.4,
+                    pieSliceText: 'value'
+                };
+
+                var chart2 = new google.visualization.PieChart(document.getElementById('chartStatus'));
+                chart2.draw(data2, options2);
+           // }
+           //);
+
+            //$.get("./csv/bugsPerDayStats.csv", function (csvString) {
+            //    var arrayData3 = $.csv.toArrays(csvString, { onParseValue: $.csv.hooks.castToScalar });
+                var data3 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data1));
+
+                var options3 = {
+                    title: 'Bugs per day',
+                    width: 900,
+                    legend: { position: 'none' },
+                    chart: { title: '#Bugs per day' },
+                    bars: 'horizontal', // Required for Material Bar Charts.
+                    axes: {
+                        x: {
+                            0: { side: 'top', label: 'Count' } // Top x-axis.
+                        }
+                    },
+                    bar: { groupWidth: "100%" }
+                };
+
+                var chart3 = new google.charts.Bar(document.getElementById('chartBugsPerDay'));
+                chart3.draw(data3, options3);
+            //}
+            //);
+        }
+
+    </script>
+
+    
+    
+    </head>
+    <body>
+        <!--  <ul id="menu">
+              <li>@Html.ActionLink("Home", "Index", "Home")</li>
+              <li>@Html.ActionLink("Movies", "Index", "Movies")</li>
+              <li>@Html.ActionLink("About", "About", "Home")</li>
+              <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+          </ul> -->
+
+        <div class="masthead hero">
+            <h1>Sprint Health Analyzer</h1>
+        </div>        
+
+        @RenderBody()
+
+</body>
+</html>

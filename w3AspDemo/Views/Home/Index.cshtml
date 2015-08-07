@@ -1,0 +1,27 @@
+﻿@model w3AspDemo.Controllers.JiraResults
+@{ViewBag.Title = "Dashboard";}
+
+@{ViewBag.Data1 = @Model.PriorityStats.ArrayData;}
+@{ViewBag.Data2 = @Model.StatusStats.ArrayData;}
+@{ViewBag.Data3 = @Model.BugsPerDayStats.ArrayData;}
+
+
+<table>
+    <tr>
+        <td id="chartPriority"></td>
+        <td id="chartStatus"></td>
+    </tr>
+</table>
+<div id="chartBugsPerDay" style="width: 900px; height: 500px; margin: 0 auto;"></div>
+
+<div class="content">
+    <div class="col-sm-6"></div>
+</div>
+
+<div class="footer">
+    <div class="love">
+        <p>Made with &#9825;</p>
+        <p>Version 0.1</p>
+        <p>Results colected at: @Model.TimeStamp.ToShortTimeString() </p>
+     </div>
+</div>
