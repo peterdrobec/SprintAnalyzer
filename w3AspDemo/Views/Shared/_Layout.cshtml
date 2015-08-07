@@ -47,7 +47,7 @@
 
             //$.get("./csv/bugsPerDayStats.csv", function (csvString) {
             //    var arrayData3 = $.csv.toArrays(csvString, { onParseValue: $.csv.hooks.castToScalar });
-                var data3 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data1));
+                var data3 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data3));
 
                 var options3 = {
                     title: 'Bugs per day',
