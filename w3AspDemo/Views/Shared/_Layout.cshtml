@@ -10,15 +10,12 @@
 
     <script src="https://www.google.com/jsapi"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>    
-    @*<script src="@Url.Content("~/Scripts/jquery.csv-0.71.js")"></script>*@
-
+    
     <script>
         google.load("visualization", "1", { packages: ["corechart", "bar"] });
         google.setOnLoadCallback(drawCharts);
         function drawCharts() {
-            // grab the CSV
-            //$.get("./csv/priorityStats.csv", function (csvString) {
-            //    var arrayData1 = $.csv.toArrays(csvString, { onParseValue: $.csv.hooks.castToScalar });
+            
                 var data1 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data1));
                 var options1 = {
                     title: '#Bugs and Priority',
@@ -28,11 +25,7 @@
 
                 var chart1 = new google.visualization.PieChart(document.getElementById('chartPriority'));
                 chart1.draw(data1, options1);
-            //}
-            // );
-
-            //$.get("./csv/statusStats.csv", function (csvString) {
-            //    var arrayData2 = $.csv.toArrays(csvString, { onParseValue: $.csv.hooks.castToScalar });
+         
                 var data2 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data2));
                 var options2 = {
                     title: '#Bugs and Status',
@@ -42,11 +35,7 @@
 
                 var chart2 = new google.visualization.PieChart(document.getElementById('chartStatus'));
                 chart2.draw(data2, options2);
-           // }
-           //);
-
-            //$.get("./csv/bugsPerDayStats.csv", function (csvString) {
-            //    var arrayData3 = $.csv.toArrays(csvString, { onParseValue: $.csv.hooks.castToScalar });
+       
                 var data3 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data3));
 
                 var options3 = {
@@ -65,8 +54,7 @@
 
                 var chart3 = new google.charts.Bar(document.getElementById('chartBugsPerDay'));
                 chart3.draw(data3, options3);
-            //}
-            //);
+          
         }
 
     </script>

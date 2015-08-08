@@ -13,16 +13,14 @@ namespace w3AspDemo.Controllers
        
         public ActionResult Index()
         {
-            //JiraResults results = new JiraResults();
-            JiraResults results = (JiraResults)HttpContext.ApplicationInstance.Application.Get("Results");
-            if ((DateTime.Now - results.TimeStamp).TotalMinutes < 15)
+            if ((DateTime.Now - ((JiraResults)HttpContext.ApplicationInstance.Application.Get("Results")).TimeStamp).TotalMinutes < 15)
             {
-                return View(results);
+                return View((JiraResults)HttpContext.ApplicationInstance.Application.Get("Results"));
             }
             else
             {
-                results.getResults();
-                return View(results);
+                ((JiraResults)HttpContext.ApplicationInstance.Application.Get("Results")).getResults();
+                return View((JiraResults)HttpContext.ApplicationInstance.Application.Get("Results"));
             }
         }
 
