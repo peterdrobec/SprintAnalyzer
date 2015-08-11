@@ -38,6 +38,11 @@ width: 50%;
 height: 400px;
 }
 
+#center{
+    position: absolute;
+    top: 125px;
+    left: 25%;
+}
 
 
 .navbar-inverse {

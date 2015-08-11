@@ -35,7 +35,7 @@ namespace w3AspDemo.Controllers
 
             cookies = JiraMethods.jiraAuthentication();
             JiraMethods.getStartAndEndDate(cookies, out sprintStartDate, out sprintEndDate);
-            url = "http://dev-aus-jira-01.swdev.local/rest/api/2/search?jql=project+%3D+%22Unified+IT+Manager%22+AND+created>" + "'" + sprintStartDate.ToString("yyyy-MM-dd") + "'" + "AND+created<=" + "'" + sprintEndDate.ToString("yyyy-MM-dd") + "'";
+            url = "http://dev-aus-jira-01.swdev.local/rest/api/2/search?jql=project+%3D+%22Unified+IT+Manager%22+AND+created>" + "'" + sprintStartDate.ToString("yyyy-MM-dd") + "'" + "AND+created<=" + "'" + sprintEndDate.ToString("yyyy-MM-dd") + "'&maxResults=100";
             results = JiraMethods.deserializeFilterResults(url, cookies);
 
             this.PriorityStats = JiraMethods.getPriorityStats(results.issues);

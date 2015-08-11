@@ -12,13 +12,14 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>    
     
     <script>
+        var x = @Html.Raw(@ViewBag.PriorityCount)
         google.load("visualization", "1", { packages: ["corechart", "bar"] });
         google.setOnLoadCallback(drawCharts);
         function drawCharts() {
             
                 var data1 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data1));
                 var options1 = {
-                    title: '#Bugs and Priority',
+                    title: x,
                     pieHole: 0.4,
                     pieSliceText: 'value'
                 };
@@ -71,7 +72,7 @@
           </ul> -->
 
         <div class="masthead hero">
-            <h1>Sprint Health Analyzer</h1>
+            <h1>Sprint Health Analyzer®</h1>
         </div>        
 
         @RenderBody()

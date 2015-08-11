@@ -5,6 +5,8 @@
 @{ViewBag.Data2 = @Model.StatusStats.ArrayData;}
 @{ViewBag.Data3 = @Model.BugsPerDayStats.ArrayData;}
 
+@{ViewBag.PriorityCount = @Model.PriorityStats.Total.ToString();}
+
 
 <table>
     <tr>
@@ -14,14 +16,15 @@
 </table>
 <div id="chartBugsPerDay" style="width: 900px; height: 500px; margin: 0 auto;"></div>
 
-<div class="content">
+@*<div class="content">
     <div class="col-sm-6"></div>
-</div>
+</div>*@
 
 <div class="footer">
     <div class="love">
-        <p>Made with &#9825;</p>
+    @*<p>Made with &#9825;</p*@
         <p>Version 0.1</p>
         <p>Results collected at: @Model.TimeStamp.ToShortTimeString() </p>
+        <p>© 2015 All right reserved </p>
      </div>
 </div>
