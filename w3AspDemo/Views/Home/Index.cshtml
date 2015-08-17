@@ -5,9 +5,9 @@
 @{ViewBag.Data2 = @Model.StatusStats.ArrayData;}
 @{ViewBag.Data3 = @Model.BugsPerDayStats.ArrayData;}
 
-@{ViewBag.PriorityCount = @Model.PriorityStats.Total.ToString();}
+@{ViewBag.itemsCount = @Model.itemsCount.ToString();}
 
-
+<h2 style="margin: 0 auto; text-align: center;">Total items opened in active sprints: @Model.itemsCount.ToString() / @Model.bugCount.ToString()</h2>
 <table>
     <tr>
         <td id="chartPriority"></td>

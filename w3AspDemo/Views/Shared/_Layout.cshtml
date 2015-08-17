@@ -12,14 +12,14 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>    
     
     <script>
-        var x = @Html.Raw(@ViewBag.PriorityCount)
+        var tit1 = "#Opened Bugs per Priority: ";
         google.load("visualization", "1", { packages: ["corechart", "bar"] });
         google.setOnLoadCallback(drawCharts);
         function drawCharts() {
             
                 var data1 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data1));
                 var options1 = {
-                    title: x,
+                    title: tit1,
                     pieHole: 0.4,
                     pieSliceText: 'value'
                 };
@@ -29,7 +29,7 @@
          
                 var data2 = new google.visualization.arrayToDataTable(@Html.Raw(@ViewBag.Data2));
                 var options2 = {
-                    title: '#Bugs and Status',
+                    title: '#Opened Bugs per Status:',
                     pieHole: 0.4,
                     pieSliceText: 'value'
                 };

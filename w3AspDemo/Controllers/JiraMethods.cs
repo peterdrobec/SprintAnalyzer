@@ -121,6 +121,7 @@ namespace w3AspDemo.Controllers
             Result x = new Result("Priority", "Count");
             var priorityGroups =
                 from ticket in jtickets
+                where ticket.fields.issuetype.name == "Bug"
                 group ticket by ticket.fields.priority.name into priorityGroup
                 select priorityGroup;
 
@@ -141,6 +142,7 @@ namespace w3AspDemo.Controllers
             Result x = new Result("Status", "Count");
             var statGroups =
                 from ticket in jtickets
+                where ticket.fields.issuetype.name == "Bug"
                 group ticket by ticket.fields.status.name into statGroup
                 select statGroup;
 
@@ -159,6 +161,7 @@ namespace w3AspDemo.Controllers
             Result x = new Result("Day", "Count");
             var dayGroups =
                 from ticket in jtickets
+                where ticket.fields.issuetype.name == "Bug"
                 group ticket by DateTime.Parse(ticket.fields.created).ToString("yyyy/MM/dd") into dayGroup
                 select dayGroup;
 
@@ -173,7 +176,7 @@ namespace w3AspDemo.Controllers
         //this method returns list of items with undefined priority and creator name
         public static Result getUndefinedBugs(List<JiraTicket> jtickets)
         {
-            Result x = new Result("Issue","Creator");
+            Result x = new Result();
             var undefined =
                from ticket in jtickets
                where ticket.fields.priority.name == "Undefined"
@@ -182,9 +185,9 @@ namespace w3AspDemo.Controllers
           
                 foreach (var un in undefined)
                 {
-                    x.addItem(un.key, un.displayName);                    
+                    x.ArrayData += System.Environment.NewLine;
+                    x.ArrayData += un.key + " " + un.displayName + " http://dev-aus-jira-01.swdev.local/browse/"+un.key;
                 }
-            x.closeArray();
             return x;
           }        
     }

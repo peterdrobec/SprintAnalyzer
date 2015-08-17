@@ -24,6 +24,8 @@ namespace w3AspDemo.Controllers
         public Result UndefinedBugs { get; set; }
 
         public DateTime TimeStamp { get; set; }
+        public int itemsCount { get; set; }
+        public int bugCount { get; set; }
 
         public void getResults()
         {
@@ -37,12 +39,23 @@ namespace w3AspDemo.Controllers
             JiraMethods.getStartAndEndDate(cookies, out sprintStartDate, out sprintEndDate);
             url = "http://dev-aus-jira-01.swdev.local/rest/api/2/search?jql=project+%3D+%22Unified+IT+Manager%22+AND+created>" + "'" + sprintStartDate.ToString("yyyy-MM-dd") + "'" + "AND+created<=" + "'" + sprintEndDate.ToString("yyyy-MM-dd") + "'&maxResults=100";
             results = JiraMethods.deserializeFilterResults(url, cookies);
+            
+            this.itemsCount = results.total;
+            this.bugCount = 0;
+
+            foreach(JiraTicket jt in results.issues)
+            {
+                if (jt.fields.issuetype.name == "Bug")
+                    this.bugCount += 1;
+            }
 
             this.PriorityStats = JiraMethods.getPriorityStats(results.issues);
             this.StatusStats =  JiraMethods.getStatusStats(results.issues);
             this.BugsPerDayStats = JiraMethods.getBugsPerDayStats(results.issues);
             this.UndefinedBugs = JiraMethods.getUndefinedBugs(results.issues);
             this.TimeStamp = DateTime.Now;
+
+            Email.sendEmail(UndefinedBugs);
         }
     }
 
@@ -54,8 +67,13 @@ namespace w3AspDemo.Controllers
         public Result(string a, string b)
         {
             this.Total = 0;
-            this.ArrayData = "[['"+a+"' , '"+b+"']";
-            
+            this.ArrayData = "[['"+a+"' , '"+b+"']";            
+        }
+
+        public Result()
+        {
+            this.Total = 0;
+            this.ArrayData = "";
         }
         public void addItem(string x, string y)
         {
