@@ -27,7 +27,7 @@ namespace w3AspDemo.Controllers
         public int itemsCount { get; set; }
         public int bugCount { get; set; }
 
-        public void getResults()
+        public void getSprintResults()
         {
             CookieContainer cookies = new CookieContainer();
             FilterResults results = new FilterResults();
@@ -57,6 +57,38 @@ namespace w3AspDemo.Controllers
 
             Email.sendEmail(UndefinedBugs);
         }
+
+        //public void getResults(string url)
+        //{
+        //    CookieContainer cookies = new CookieContainer();
+        //    FilterResults results = new FilterResults();
+        //    DateTime sprintStartDate = DateTime.Now;
+        //    DateTime sprintEndDate = DateTime.Now;
+
+        //    cookies = JiraMethods.jiraAuthentication();
+        //    JiraMethods.getStartAndEndDate(cookies, out sprintStartDate, out sprintEndDate);
+        //    //url = "http://dev-aus-jira-01.swdev.local/rest/api/2/search?jql=project+%3D+%22Unified+IT+Manager%22+AND+created>" + "'" + sprintStartDate.ToString("yyyy-MM-dd") + "'" + "AND+created<=" + "'" + sprintEndDate.ToString("yyyy-MM-dd") + "'&maxResults=100";
+        //    results = JiraMethods.deserializeFilterResults(url, cookies);
+
+        //    this.itemsCount = results.total;
+        //    this.bugCount = 0;
+
+        //    foreach (JiraTicket jt in results.issues)
+        //    {
+        //        if (jt.fields.issuetype.name == "Bug")
+        //            this.bugCount += 1;
+        //    }
+
+        //    this.PriorityStats = JiraMethods.getPriorityStats(results.issues);
+        //    this.StatusStats = JiraMethods.getStatusStats(results.issues);
+        //    this.BugsPerDayStats = JiraMethods.getBugsPerDayStats(results.issues);
+        //    this.UndefinedBugs = JiraMethods.getUndefinedBugs(results.issues);
+        //    this.TimeStamp = DateTime.Now;
+
+        //    Email.sendEmail(UndefinedBugs);
+
+        //}
+
     }
 
     public class Result

@@ -51,8 +51,25 @@ namespace w3AspDemo.Controllers
 
             FilterResults results = JsonConvert.DeserializeObject<FilterResults>(resultJson, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             return results;
-
         }
+
+        public static FilterResults deserializeFilterResults(string username, string password, string jql)
+        {
+            string resultJson;
+            string url = "http://dev-aus-jira-01.swdev.local/rest/api/2/search?jql="+jql+"&os_username="+username+"&os_password="+password;
+        
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            resultJson = readHttpResponse(response);
+
+            FilterResults results = JsonConvert.DeserializeObject<FilterResults>(resultJson, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            return results;
+        }
+
+        //project = "Unified IT Manager" and Sprint = "Sprint 1 SNI - Legend"
+
 
         //method returns start and end date of running sprints
         public static void getStartAndEndDate(CookieContainer cookies, out DateTime start, out DateTime end)

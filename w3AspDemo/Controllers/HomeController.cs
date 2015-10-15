@@ -19,9 +19,10 @@ namespace w3AspDemo.Controllers
             }
             else
             {
-                ((JiraResults)HttpContext.ApplicationInstance.Application.Get("Results")).getResults();
+                ((JiraResults)HttpContext.ApplicationInstance.Application.Get("Results")).getSprintResults();
                 return View((JiraResults)HttpContext.ApplicationInstance.Application.Get("Results"));
             }
+            
         }
 
         public ActionResult About()
