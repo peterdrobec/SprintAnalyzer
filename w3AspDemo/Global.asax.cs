@@ -26,7 +26,7 @@ namespace w3AspDemo
 
           // var auth = w3AspDemo.Controllers.JiraMethods.jiraAuthentication();
            //var res = w3AspDemo.Controllers.JiraMethods.deserializeFilterResults(@"http://dev-aus-jira-01.swdev.local/rest/api/2/search?jql=project = ""Unified IT Manager"" AND Sprint is EMPTY AND fixVersion is EMPTY AND status = Open AND issuetype != Epic", auth);
-            var res = w3AspDemo.Controllers.JiraMethods.deserializeFilterResults("peter.drobec", "pe_dro123", @"project = ""Unified IT Manager"" and Sprint = ""Sprint 1 SNI - Legend""");
+            var res = w3AspDemo.Controllers.JiraMethods.deserializeFilterResults("peter.drobec", "pe_dro123", @"project=""Unified IT Manager"" and Sprint = 2461");
             w3AspDemo.Controllers.PdfCreator.PdfPrinter(res);
 
         }
